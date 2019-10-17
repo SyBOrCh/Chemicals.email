@@ -21,10 +21,12 @@ Route::get('/', function() {
 });
 
 Route::post('/queries', function (Request $request) {
+    Log::log($request->all());
 
-    return $request;
-    
 	$mail = \App\ReceivedMail::find($request->query);
+
+	return $mail;
+
 	$results = $request->results;
 
 	Mail::to($mail->sender)->send(new SearchResultsMail($mail, $results));
