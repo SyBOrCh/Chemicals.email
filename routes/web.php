@@ -21,9 +21,14 @@ Route::get('/', function() {
 });
 
 Route::post('/queries', function (Request $request) {
+
 	$mail = \App\ReceivedMail::findOrFail($request->queryId);
 
 	$results = $request->results;
+
+	if (empty($results)) {
+	    return response([], 200);
+    }
 
 	Mail::to($mail->sender)->send(new SearchResultsMail($mail, $results));
 
