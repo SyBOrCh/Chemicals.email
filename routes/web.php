@@ -16,8 +16,8 @@ Route::get('/', function() {
 	return view('welcome');
 });
 
-Route::post('/queries/{query}', function ($query) {
-	$mail = \App\ReceivedMail::find($query);
+Route::post('/queries', function () {
+	$mail = \App\ReceivedMail::find(request('query'));
 
 	// Mail::to($mail->sender)->send(new SearchResultsMail($mail, request('results')));
 
