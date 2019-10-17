@@ -13,7 +13,7 @@ class MedchemMailHandler
         	'group'		=> 'medchem',
             'sender'    => $email->from(),
             'subject'   => $email->subject(),
-            'content'   => $email->html(),
+            'content'   => $email->text(),
         ]);
     }
 }

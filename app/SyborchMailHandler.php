@@ -13,7 +13,7 @@ class SyborchMailHandler
         	'group'		=> 'syborch',
             'sender'    => $email->from(),
             'subject'   => $email->subject(),
-            'content'   => $email->html(),
+            'content'   => $email->text(),
         ]);
     }
 }
