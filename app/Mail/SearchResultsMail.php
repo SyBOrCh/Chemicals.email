@@ -34,6 +34,6 @@ class SearchResultsMail extends Mailable
     {
         return $this
             ->subject('Re: ' . $this->mail->subject)
-            ->view('mails.searchresults');
+            ->view('emails.searchresults');
     }
 }
