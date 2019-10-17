@@ -17,11 +17,13 @@ Route::get('/', function() {
 });
 
 Route::post('/queries', function () {
+	dd(request());
+	
 	$mail = \App\ReceivedMail::find(request('query'));
 
 	// Mail::to($mail->sender)->send(new SearchResultsMail($mail, request('results')));
 
-	return request('results');
+	return request();
 });
 
 Route::get('/{group}', function ($group) {
