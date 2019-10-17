@@ -1,0 +1,44 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+use Illuminate\Support\Facades\Log;
+
+Route::get('/', function() {
+	return view('welcome');
+});
+
+Route::post('/queries/{query}', function ($query) {
+	$mail = \App\ReceivedMail::find($query);
+
+	Log::info("The mail with ID ${$mail->id} was sent the following results: " . request('results'));
+});
+
+Route::get('/{group}', function ($group) {
+	$mails = \App\ReceivedMail::where('group', $group)->get();
+
+	return $mails->map(function ($mail) {
+		return [
+			'id' => $mail->id,
+			'keywords' => $mail->keywords(),
+		];
+	});
+});
+
+// Route::get('/{query}', function ($query) {	
+// 	$syborchResults = collect(json_decode(file_get_contents('http://syborch.test/searchjson?search=' . $query)));
+// 	$medchemResults = collect(json_decode(file_get_contents('http://medchem.test/searchjson?search=' . $query)));
+
+// 	return [
+// 		'syborch' => $syborchResults, 
+// 		'medchem' => $medchemResults
+// 	];
+// });
