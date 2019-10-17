@@ -30,7 +30,7 @@ Route::post('/queries', function (Request $request) {
 	return response([], 200);
 });
 
-Route::get('/{group}', function ($group) {
+Route::get('/groups/{group}', function ($group) {
 	$mails = \App\ReceivedMail::where('processed_at', null)->where('group', $group)->get();
 
 	if (count($mails) < 1) {
