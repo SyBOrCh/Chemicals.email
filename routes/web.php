@@ -12,7 +12,7 @@
 */
 
 use App\Mail\SearchResultsMail;
-use Illuminate\Support\Facades\Log;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -20,15 +20,17 @@ Route::get('/', function() {
 	return view('welcome');
 });
 
+Route::post('/signup', function() {
+    User::firstOrCreate(['email' => request('email')]);
+
+    return view('thanks');
+});
+
 Route::post('/queries', function (Request $request) {
 
 	$mail = \App\ReceivedMail::findOrFail($request->queryId);
 
 	$results = $request->results;
-
-	if (empty($results)) {
-	    return response([], 200);
-    }
 
 	Mail::to($mail->sender)->send(new SearchResultsMail($mail, $results));
 
