@@ -33,6 +33,10 @@ Route::post('/queries', function (Request $request) {
 Route::get('/{group}', function ($group) {
 	$mails = \App\ReceivedMail::where('processed_at', null)->where('group', $group)->get();
 
+	if (count($mails) < 1) {
+	    return [];
+    }
+
 	$mails->each->update(['processed_at' => now()]);
 
 	return $mails->map(function ($mail) {
