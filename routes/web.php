@@ -21,11 +21,7 @@ Route::get('/', function() {
 });
 
 Route::post('/queries', function (Request $request) {
-    Log::info($request->values());
-
 	$mail = \App\ReceivedMail::find($request->query);
-
-	return $mail;
 
 	$results = $request->results;
 
