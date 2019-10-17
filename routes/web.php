@@ -16,13 +16,13 @@ Route::get('/', function() {
 	return view('welcome');
 });
 
-Route::post('/queries', function () {
-
-	$mail = \App\ReceivedMail::find(request('query'));
+Route::post('/queries', function (Request $request) {
+	return $request;
+	// $mail = \App\ReceivedMail::find(request('query'));
 
 	// Mail::to($mail->sender)->send(new SearchResultsMail($mail, request('results')));
 
-	return [$mail, request()];
+	// return [$mail, request()];
 });
 
 Route::get('/{group}', function ($group) {
