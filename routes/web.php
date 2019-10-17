@@ -10,26 +10,24 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Mail\SearchResultsMail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function() {
 	return view('welcome');
 });
 
 Route::post('/queries', function (Request $request) {
-	return json_decode($request->results);
 
-	// SearchResult::create([
-		// 'query_id' 	=> $request->query,
-		// 'results'	=> $request->results, 
-	// ]);
+	$mail = \App\ReceivedMail::find($request->query);
+	$results = $request->results;
 
-	// $mail = \App\ReceivedMail::find(request('query'));
+	Mail::to($mail->sender)->send(new SearchResultsMail($mail, $results));
 
-	// Mail::to($mail->sender)->send(new SearchResultsMail($mail, request('results')));
-
-	// return [$mail, request()];
+	return response([], 200);
 });
 
 Route::get('/{group}', function ($group) {
@@ -43,12 +41,12 @@ Route::get('/{group}', function ($group) {
 	});
 });
 
-// Route::get('/{query}', function ($query) {	
+// Route::get('/{query}', function ($query) {
 // 	$syborchResults = collect(json_decode(file_get_contents('http://syborch.test/searchjson?search=' . $query)));
 // 	$medchemResults = collect(json_decode(file_get_contents('http://medchem.test/searchjson?search=' . $query)));
 
 // 	return [
-// 		'syborch' => $syborchResults, 
+// 		'syborch' => $syborchResults,
 // 		'medchem' => $medchemResults
 // 	];
 // });
