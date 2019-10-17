@@ -17,9 +17,8 @@ Route::get('/', function() {
 	return view('welcome');
 });
 
-Route::post('/queries', function () {
-	
-	return Request::all();
+Route::post('/queries', function (Request $request) {
+	return $request->all();
 
 	// SearchResult::create([
 		// 'query_id' 	=> $request->query,
