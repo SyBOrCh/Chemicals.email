@@ -18,7 +18,13 @@ Route::get('/', function() {
 });
 
 Route::post('/queries', function (Request $request) {
-	return $request;
+	return $request->results;
+
+	// SearchResult::create([
+		// 'query_id' 	=> $request->query,
+		// 'results'	=> $request->results, 
+	// ]);
+
 	// $mail = \App\ReceivedMail::find(request('query'));
 
 	// Mail::to($mail->sender)->send(new SearchResultsMail($mail, request('results')));
