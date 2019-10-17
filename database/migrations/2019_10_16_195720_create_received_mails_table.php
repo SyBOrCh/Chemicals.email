@@ -19,6 +19,7 @@ class CreateReceivedMailsTable extends Migration
             $table->string('subject');
             $table->text('content');
             $table->string('group');
+            $table->dateTime('processed_at')->nullable();
             $table->timestamps();
         });
     }

@@ -1,17 +1,16 @@
-Your search results from the {{ ucfirst($mail->group) }} database:
+Your search results from the <strong>{{ ucfirst($mail->group) }}</strong> database:
 
 <ul>
 @foreach ($results as $keyword => $results)
 	<li>
-		"<strong> {{ $keyword}} </strong>":
+		"<strong>{{ $keyword }}</strong>":
 		<ul>
 			@foreach ($results as $result)
 			<li>
-                Name: <a href="http://database.syborchserver.nl/chemical/{{ $result['id'] }}">{{ $result['name'] }}</a> <br>
+                <a href="http://{{ $mail->group == 'syborch' ? 'database' : 'medchemdb' }}.syborchserver.nl/chemical/{{ $result['id'] }}">{{ $result['name'] }}</a> <br>
                 Quantity: {{ $result['quantity'] }} <br>
-				Location: {{ $result['location'] }} . {{ $result['cabinet'] }} . {{ $result['number'] }} <br>
-                MW: {{ $result['molweight'] }} <br>
-                density: {{ $result['density'] }}
+				Location: {{ $result['location'] }}.{{ $result['cabinet'] }}.{{ $result['number'] }} <br>
+                Properties: {{ $result['molweight'] }} g/mol | density: {{ $result['density'] }} g/mL
 			</li>
 			@endforeach
 		</ul>
