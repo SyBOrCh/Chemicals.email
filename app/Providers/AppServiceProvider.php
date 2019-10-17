@@ -4,6 +4,7 @@ namespace App\Providers;
 use BeyondCode\Mailbox\Facades\Mailbox;
 use App\SyborchMailHandler;
 use App\MedchemMailHandler;
+use App\RegisterMailHandler;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -28,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Mailbox::to('syborch@chemicals.email', SyborchMailHandler::class);
         Mailbox::to('medchem@chemicals.email', MedchemMailHandler::class);
+        Mailbox::to('register@chemicals.email', RegisterMailHandler::class);
     }
 }
