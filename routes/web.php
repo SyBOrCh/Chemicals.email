@@ -19,7 +19,9 @@ Route::get('/', function() {
 Route::post('/queries/{query}', function ($query) {
 	$mail = \App\ReceivedMail::find($query);
 
-	Log::info("The mail with ID ${$mail->id} was sent the following results: " . request('results'));
+	// Mail::to($mail->sender)->send(new SearchResultsMail($mail, request('results')));
+
+	return request('results');
 });
 
 Route::get('/{group}', function ($group) {
