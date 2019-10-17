@@ -18,7 +18,7 @@ Route::get('/', function() {
 });
 
 Route::post('/queries', function (Request $request) {
-	return $request->all();
+	return $request->results;
 
 	// SearchResult::create([
 		// 'query_id' 	=> $request->query,
