@@ -12,6 +12,7 @@
 */
 
 use App\Mail\SearchResultsMail;
+use App\Mail\UserRegistrationMail;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -21,7 +22,9 @@ Route::get('/', function() {
 });
 
 Route::post('/signup', function() {
-    User::firstOrCreate(['email' => request('email')]);
+    $user = User::firstOrCreate(['email' => request('email')]);
+
+    Mail::to(config('app.admin_email'))->send(new UserRegistrationMail($user));
 
     return view('thanks');
 });
