@@ -7,8 +7,8 @@ Your search results are ready:
 		<ul>
 			@foreach ($results as $result)
 			<li>
-				Name: {{ $result->name }} <br>
-				Location: {{ $result->location }}
+				Name: {{ $result['name'] }} <br>
+				Location: {{ $result['location'] }}
 			</li>
 			@endforeach
 		</ul>
